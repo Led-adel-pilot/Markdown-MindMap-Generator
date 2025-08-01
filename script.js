@@ -6,10 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let jm = null; // To hold the jsMind instance
 
+    let idCounter = 0;
     // Function to convert markmap data to jsMind format
     function convertToJsMindFormat(node, isRoot = true) {
+        idCounter++;
         const jmNode = {
-            id: node.key,
+            id: `node-${idCounter}`,
             topic: node.value,
             children: [],
         };
@@ -29,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to handle the conversion
     function convert() {
+        idCounter = 0;
         const markdown = markdownInput.value;
         const transformer = new markmap.Transformer();
         const { root } = transformer.transform(markdown);
